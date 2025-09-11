@@ -1,13 +1,13 @@
 function add(num1, num2) {
-    return num1 + num2;
+    return (num1 + num2).toPrecision(6);
 }
 
 function subtract(num1, num2) {
-    return num1 - num2;
+    return (num1 - num2).toPrecision(6);
 }
 
 function multiply(num1, num2) {
-    return num1 * num2;
+    return (num1 * num2).toPrecision(6);
 }
 
 function divide(num1, num2) {
@@ -45,6 +45,8 @@ const container = document.querySelector(".container");
 const display = container.querySelector("#text-field");
 
 let isComputed = false; //if you press equal, then the expression is "fully" computed
+
+let decimalFlag = false; //can't type more than one decimal per value
 
 //get the buttons & add event listeners
 container.querySelector("#one").addEventListener("click", () => {
@@ -143,9 +145,10 @@ container.querySelector("#clear").addEventListener("click", () => {
 
 container.querySelector("#add").addEventListener("click", () => {
     if (containsOperator(display.value))
-         display.value = operate(display.value) + "+";
+        display.value = operate(display.value) + "+";
     else
         display.value = display.value + "+";
+    decimalFlag = false;
 });
 
 container.querySelector("#subtract").addEventListener("click", () => {
@@ -153,6 +156,7 @@ container.querySelector("#subtract").addEventListener("click", () => {
         display.value = operate(display.value) + "-";
     else
         display.value = display.value + "-";
+    decimalFlag = false;
 });
 
 container.querySelector("#multiply").addEventListener("click", () => {
@@ -160,6 +164,7 @@ container.querySelector("#multiply").addEventListener("click", () => {
         display.value = operate(display.value) + "*";
     else
         display.value = display.value + "*";
+    decimalFlag = false;
 });
 
 container.querySelector("#divide").addEventListener("click", () => {
@@ -167,9 +172,18 @@ container.querySelector("#divide").addEventListener("click", () => {
         display.value = operate(display.value) + "/";
     else
         display.value = display.value + "/";
+    decimalFlag = false;
 });
 
 container.querySelector("#equal").addEventListener("click", () => {
     display.value = operate(display.value);
     isComputed = true;
+    decimalFlag = false;
+});
+
+container.querySelector("#decimal").addEventListener("click", () => {
+    if (!decimalFlag) {
+        display.value = display.value + ".";
+        decimalFlag = true;
+    }  
 });
