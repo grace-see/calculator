@@ -75,3 +75,19 @@ container.querySelector("#zero").addEventListener("click", () => {
 container.querySelector("#clear").addEventListener("click", () => {
     display.value = "";
 });
+
+container.querySelector("#add").addEventListener("click", () => {
+    display.value = display.value + "+";
+});
+
+container.querySelector("#subtract").addEventListener("click", () => {
+    display.value = display.value + "-";
+});
+
+container.querySelector("#multiply").addEventListener("click", () => {
+    display.value = display.value + "*";
+});
+
+container.querySelector("#divide").addEventListener("click", () => {
+    display.value = display.value + "/";
+});
